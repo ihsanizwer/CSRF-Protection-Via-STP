@@ -1,3 +1,4 @@
-/home/Ihsan_I/Soft/CSRF-Protection-Via-STP/src/main/java/validation/Valldator.java
-/home/Ihsan_I/Soft/CSRF-Protection-Via-STP/src/main/java/data/SessionToCSRFMap.java
-/home/Ihsan_I/Soft/CSRF-Protection-Via-STP/src/main/java/servlet/SessionCreator.java
+/home/ihsani/IdeaProjects/CSRF-Protection-Via-STP/src/main/java/servlet/SessionCreator.java
+/home/ihsani/IdeaProjects/CSRF-Protection-Via-STP/src/main/java/data/SessionToCSRFMap.java
+/home/ihsani/IdeaProjects/CSRF-Protection-Via-STP/src/main/java/servlet/SessionDestroyer.java
+/home/ihsani/IdeaProjects/CSRF-Protection-Via-STP/src/main/java/validation/Valldator.java
