@@ -1,6 +1,6 @@
-servlet/CSRFTokenObtainer.class
-servlet/SessionDestroyer.class
-data/SessionToCSRFMap.class
 validation/Validator.class
-servlet/Transaction.class
+servlet/SessionDestroyer.class
 servlet/SessionCreator.class
+servlet/Transaction.class
+data/SessionToCSRFMap.class
+servlet/CSRFTokenObtainer.class
