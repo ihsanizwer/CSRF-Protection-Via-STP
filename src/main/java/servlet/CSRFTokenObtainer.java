@@ -1,7 +1,6 @@
 package servlet;
 
 import javax.servlet.ServletException;
-import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -11,7 +10,7 @@ import java.io.PrintWriter;
 
 import data.SessionToCSRFMap;
 
-@WebServlet("/get_csrf_token")
+
 public class CSRFTokenObtainer extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
