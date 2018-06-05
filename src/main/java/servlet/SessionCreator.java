@@ -22,7 +22,7 @@ public class SessionCreator extends HttpServlet {
         HttpSession session = request.getSession(false);
 
         if(session == null) {
-            //Will be authenticating user and Making a new session since We dont have a session at this moment
+            //Will be authenticating user and Making a new session since We don't have a session at this moment
             String username = request.getParameter("user");
             String password = request.getParameter("pass");
 
@@ -35,16 +35,19 @@ public class SessionCreator extends HttpServlet {
                     csrfToken = +bytearray[i] + "";
                 random.nextBytes(bytearray);
                 stcm.addSession(sess, csrfToken);
+                //creating a new session if not available
                 session = request.getSession();
                 session.setAttribute("SomeBankSes_ID", sess);
                 Cookie ses = new Cookie("STPSesID", sess);
+                //Setting cookie expiry
                 ses.setMaxAge(30 * 60);
                 response.addCookie(ses);
+                //User authentication complete, redirecting user to the homepage
                 response.sendRedirect("home.jsp");
             } else {
+                //wrong username and password combo
                 response.setContentType("text/html");
                 response.setCharacterEncoding("UTF-8");
-
                 PrintWriter writer = response.getWriter();
                 writer.append("!DOCTYPE html\r\n")
                         .append("<html>\r\n")

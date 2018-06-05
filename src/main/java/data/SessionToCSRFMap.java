@@ -19,9 +19,11 @@ public class SessionToCSRFMap {
         return sessionToCSRFMap.get(sessionID);
     }
 
-    public String getSessionID(String csrfToken){
+    /*public String getSessionID(String csrfToken){
         return csrfToSessionMap.get(csrfToken);
     }
+     Unused so commented it out
+     */
 
     public void addSession(String sessionID, String csrfToken){
 
@@ -44,5 +46,16 @@ public class SessionToCSRFMap {
                 b = true;
         }
         return b;
+    }
+    public boolean destroySession(String session){
+        try{
+            String temp = getCSRFToken(session);
+            sessionToCSRFMap.remove(session);
+            csrfToSessionMap.remove(temp);
+            return true;
+        }
+        catch(Exception e){
+            return false;
+        }
     }
 }
