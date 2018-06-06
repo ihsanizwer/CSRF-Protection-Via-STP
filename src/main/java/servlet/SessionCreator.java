@@ -21,6 +21,7 @@ public class SessionCreator extends HttpServlet {
         StringBuffer sess = new StringBuffer("");
         StringBuffer csrfToken = new StringBuffer("");
         boolean isLogged = false;
+        boolean isCookieSet = false;
 
         HttpSession session = request.getSession(false);
 
@@ -73,10 +74,11 @@ public class SessionCreator extends HttpServlet {
                         .append("</html>\r\n");
             }
 
-        }else if(isLogged==true){
+        }
+        /*else if(isLogged==true){
 
                 response.sendRedirect("home.jsp");
-                /*
+
                 response.setContentType("text/html");
                 response.setCharacterEncoding("UTF-8");
 
@@ -87,10 +89,24 @@ public class SessionCreator extends HttpServlet {
                         .append("<h1>Error: Please delete your browser cookies and <a href='index.jsp'> try again!</a>\r\n")
                         .append("</body>\r\n")
                         .append("</html>\r\n");
-                */
 
+
+        }*/
+
+
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        Cookie cookies [] = req.getCookies();
+        for(Cookie cookie: cookies){
+            if(cookie.getName().equals("STPSesID")){
+                if(stcm.isLoggedIn(cookie.getValue())){
+                    resp.setContentType("text/plain");
+                    resp.setCharacterEncoding("UTF-8");
+                    resp.getWriter().write("home.jsp");
+                }
+            }
         }
-
-
     }
 }

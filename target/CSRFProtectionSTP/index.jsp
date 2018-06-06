@@ -1,3 +1,4 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -27,7 +28,7 @@
 	<link rel="stylesheet" type="text/css" href="https://colorlib.com/etc/lf/Login_v14/css/main.css">
 <!--===============================================================================================-->
 </head>
-<body>
+<body onload="checkIfLogged()">
 	
 	<div class="limiter">
 		<div class="container-login100">
@@ -101,6 +102,23 @@
 	<script src="vendor/countdowntime/countdowntime.js"></script>
 <!--===============================================================================================-->
 	<script src="js/main.js"></script>
+<!--===============================================================================================-->
+	<script>
+        function checkIfLogged() {
+            if(document.cookie.match(/^(.*;)?\s*STPSesID\s*=\s*[^;]+(.*)?$/)) {
+                var xhttp = new XMLHttpRequest();
+                xhttp.onreadystatechange = function () {
+                    if (this.readyState == 4 && this.status == 200) {
+                        window.location.replace(this.responseText);
+                        //alert(this.responseText);
+                    }
+                };
+                xhttp.open("GET", 'login', true);
+                xhttp.send();
+            }
+        }
+
+	</script>
 
 </body>
 </html>
