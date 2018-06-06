@@ -9,7 +9,7 @@ import java.io.PrintWriter;
 import data.SessionToCSRFMap;
 
 public class SessionDestroyer extends HttpServlet {
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         SessionToCSRFMap ctcm = SessionToCSRFMap.getInstance();
         HttpSession session = request.getSession(false);
         Cookie cookies [] = request.getCookies();

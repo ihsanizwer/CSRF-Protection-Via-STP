@@ -1,3 +1,5 @@
+<%@ page import="data.SessionToCSRFMap" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -29,11 +31,22 @@
   </head>
 
   <body>
-
+  <%
+      boolean isLoggedin = false;
+      Cookie cookies[] = request.getCookies();
+      for(Cookie cookie: cookies){
+          if(cookie.getName().equals("STPSesID") && SessionToCSRFMap.getInstance().isLoggedIn(cookie.getValue())){
+              isLoggedin =true;
+          }
+      }
+      if(!isLoggedin){
+          response.sendRedirect("index.jsp");
+      }
+  %>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">Start Bootstrap</a>
+        <a class="navbar-brand" href="#">SomeSecure Bank</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -45,13 +58,13 @@
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">About</a>
+              <a class="nav-link disabled" href="#">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Services</a>
+              <a class="nav-link" href="#">Cash Transfer</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Contact</a>
+              <a class="nav-link" href="logout">Log out</a>
             </li>
           </ul>
         </div>
@@ -62,12 +75,11 @@
     <div class="container">
       <div class="row">
         <div class="col-lg-12 text-center">
-          <h1 class="mt-5">A Bootstrap 4 Starter Template</h1>
-          <p class="lead">Complete with pre-defined file paths and responsive navigation!</p>
-          <ul class="list-unstyled">
-            <li>Bootstrap 4.1.1</li>
-            <li>jQuery 3.3.1</li>
-          </ul>
+          <h1 class="mt-5">Welcome Adam!</h1>
+          <p class="lead">Please select what service you would like to use from the top menu.</p>
+            <footer>
+                &copy;2000 - 2018 Some Secure Bank. All rights reserved.
+            </footer>
         </div>
       </div>
     </div>
