@@ -6,7 +6,9 @@
 
     <groupId>1</groupId>
     <artifactId>1</artifactId>
+    <packaging>war</packaging>
     <version>1.0-SNAPSHOT</version>
+    <name>CSRF Protection Via STP</name>
     <dependencies>
         <dependency>
             <groupId>javax.servlet</groupId>
@@ -16,6 +18,7 @@
         </dependency>
     </dependencies>
     <build>
+        <finalName>CSRFProtectionSTP</finalName>
         <resources>
             <resource>
                 <directory>src/main/webapp</directory>
