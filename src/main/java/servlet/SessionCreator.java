@@ -4,6 +4,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.net.URLDecoder;
+import java.net.URLEncoder;
 import java.security.SecureRandom;
 
 import data.SessionToCSRFMap;
@@ -16,8 +18,8 @@ public class SessionCreator extends HttpServlet {
 
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        String sess ="";
-        String csrfToken ="";
+        StringBuffer sess = new StringBuffer("");
+        StringBuffer csrfToken = new StringBuffer("");
         boolean isLogged = false;
 
         HttpSession session = request.getSession(false);
@@ -31,24 +33,28 @@ public class SessionCreator extends HttpServlet {
             }
         }
 
-        if(!isLogged) {
+        if(isLogged==false) {
             //Will be authenticating user and Making a new session since We don't have a session at this moment
             String username = request.getParameter("user");
             String password = request.getParameter("pass");
 
             if (username.equals("Adam") && password.equals("helloCSRF")) {
-                for (int i = 0; i < 20; i++)
-                    sess = +bytearray[i] + "";
                 random.nextBytes(bytearray);
+                for (int i = 0; i < 20; i++)
+                  sess.append(bytearray[i]);
+                //sess = new String(bytearray);
 
-                for (int i = 0; i < 20; i++)
-                    csrfToken = +bytearray[i] + "";
+
                 random.nextBytes(bytearray);
-                stcm.addSession(sess, csrfToken);
+                for (int i = 0; i < 20; i++)
+                    csrfToken.append(bytearray[i]);
+
+
+                stcm.addSession(sess.toString(), csrfToken.toString());
                 //creating a new session if not available
                 session = request.getSession();
                 session.setAttribute("SomeBankSes_ID", sess);
-                Cookie ses = new Cookie("STPSesID", sess);
+                Cookie ses = new Cookie("STPSesID", sess.toString());
                 //Setting cookie expiry
                 ses.setMaxAge(30 * 60);
                 response.addCookie(ses);
@@ -67,7 +73,7 @@ public class SessionCreator extends HttpServlet {
                         .append("</html>\r\n");
             }
 
-        }else{
+        }else if(isLogged==true){
 
                 response.sendRedirect("home.jsp");
                 /*
