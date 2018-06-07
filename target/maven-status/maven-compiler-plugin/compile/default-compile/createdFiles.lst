@@ -1,3 +1,4 @@
+data/AccountDetails.class
 validation/Validator.class
 servlet/SessionDestroyer.class
 servlet/SessionCreator.class

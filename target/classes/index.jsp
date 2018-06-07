@@ -50,7 +50,7 @@
 						Username
 					</span>
 					<div class="wrap-input100 validate-input m-b-36" data-validate = "Username is required">
-						<input class="input100" type="text" name="user" >
+						<input class="input100" type="text" name="user" required>
 						<span class="focus-input100"></span>
 					</div>
 					
@@ -61,7 +61,7 @@
 						<span class="btn-show-pass">
 							<i class="fa fa-eye"></i>
 						</span>
-						<input class="input100" type="password" name="pass" >
+						<input class="input100" type="password" name="pass" required>
 						<span class="focus-input100"></span>
 					</div>
 					

@@ -1,5 +1,7 @@
 package servlet;
 
+import data.AccountDetails;
+import data.SessionToCSRFMap;
 import validation.Validator;
 
 import javax.servlet.ServletException;
@@ -17,15 +19,40 @@ public class Transaction extends HttpServlet {
         Cookie cookies[] = req.getCookies();
         for(Cookie cookie: cookies){
             if(cookie.getName().equals("STPSesID")){
-                if(Validator.isValidSession(cookie.getValue(),req.getParameter("session_id"))){
+                if(Validator.isValidSession(cookie.getValue(), req.getParameter("csrf_token"))){
                     isValidTransaction = true;
                 }
             }
         }
         if(isValidTransaction){
             Double amount =  Double.parseDouble(req.getParameter("amount"));
+            Double newBalance = AccountDetails.getBalance() - amount;
+            if(newBalance < 0.00){
+                resp.setCharacterEncoding("UTF-8");
+                resp.setContentType("text/html");
+                PrintWriter writer = resp.getWriter();
+                writer.append("<!DOCTYPE html>")
+                        .append("<html>")
+                        .append("<body>")
+                        .append("<h1>You do not have enough balance to perform this transaction!</h1>")
+                        .append("</body>")
+                        .append("</html>");
+            }else{
+                AccountDetails.setBalance(newBalance);
+                resp.setContentType("text/html");
+                resp.setCharacterEncoding("UTF-8");
+                PrintWriter writer = resp.getWriter();
+                writer.append("<!DOCTYPE html>")
+                        .append("<html>")
+                        .append("<head><meta http-equiv='Refresh' content='5;url=home.jsp'></head>")
+                        .append("<body>")
+                        .append("<h1>Transaction complete! new balance is"+AccountDetails.getBalance()+"</h1>")
+                        .append("<p>Please click <a href='home.jsp'>here</a> if you are not redirected to the home page.</p>")
+                        .append("</body>")
+                        .append("</html>");
+            }
             //Add transfer amount code
-            resp.setContentType("text/html");
+            /*resp.setContentType("text/html");
             resp.setCharacterEncoding("UTF-8");
             PrintWriter writer = resp.getWriter();
             writer.append("<!DOCTYPE html>")
@@ -33,7 +60,7 @@ public class Transaction extends HttpServlet {
                     .append("<body>")
                     .append("<h1>Transfer successful. The following amount of credits has been transferred : "+amount+"</h1>")
                     .append("</body>")
-                    .append("</html>");
+                    .append("</html>");*/
         }else{
             resp.setContentType("text/html");
             resp.setCharacterEncoding("UTF-8");

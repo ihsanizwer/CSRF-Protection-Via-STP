@@ -9,7 +9,7 @@ public class Validator {
     public static boolean isValidSession(String sessionID, String csrfToken){
         if(stcm.isLoggedIn(sessionID)){
             if(stcm.getCSRFToken(sessionID).equals(csrfToken)){
-                return false;
+                return true;
             }
         }
         return false;

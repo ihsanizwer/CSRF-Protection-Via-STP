@@ -10,7 +10,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>Bare - Start Bootstrap Template</title>
+    <title>Home | Some Secure Bank</title>
 
     <!-- Bootstrap core CSS -->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -61,7 +61,7 @@
               <a class="nav-link disabled" href="#">About</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="#">Cash Transfer</a>
+              <a class="nav-link" href="transfer.jsp">Cash Transfer</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="logout">Log out</a>
